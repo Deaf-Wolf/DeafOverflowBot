@@ -35,7 +35,7 @@ async def dm_about_roles(member):
             * freelance
             * web-entwickler
                     
-            Reply to this message with one or more of the language names or emojis above so I can assign you the right roles on our server.
+            Reply to this message with one or more of the language names above so I can assign you the right roles on our server.
 
             Reply with the name or emoji of a language you're currently using and want to stop and I'll remove that role for you.
             """
@@ -43,7 +43,7 @@ async def dm_about_roles(member):
 
 @bot.event
 async def on_ready():
-    print(f"{bot.user} has connected to Discord!")
+    print(f"{bot.user} has connected to Discordserver !")
 
 @bot.event
 async def on_member_join(member):
