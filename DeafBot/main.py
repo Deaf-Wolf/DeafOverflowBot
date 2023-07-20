@@ -8,7 +8,7 @@ intents = discord.Intents.default()
 
 load_dotenv()  # Load environment variables from .env file
 DISCORD_TOKEN = os.getenv('TOKEN')
-SERVER_ID = 1115994137934692402
+SERVER_ID = 1033011746614542507
 
 
 bot = commands.Bot(command_prefix = "!", intents = intents)
@@ -20,13 +20,20 @@ async def dm_about_roles(member):
     await member.send(
         f"""Hi {member.name}, welcome to {member.guild.name}! 
         
-            Which of these languages do you use:
+            Welche Sprache benutzt du?:
                     
             * Python (🐍)
             * JavaScript (🕸️)
+            * Java
             * Rust (🦀)
-            * Go (🐹)
+            * C# ()
             * C++ (🐉)
+            
+            Was pass zu dir?:
+            * azubi
+            * hobby
+            * freelance
+            * web-entwickler
                     
             Reply to this message with one or more of the language names or emojis above so I can assign you the right roles on our server.
 
@@ -45,20 +52,8 @@ async def on_member_join(member):
 async def assign_roles(message):
     print("Assigning roles...")
     
-    languages = set(re.findall("python|javascript|rust|go|c\+\+", message.content, re.IGNORECASE))
+    languages = set(re.findall("python|javascript|java|rust|c#|c\+\+|azubi|hobby|freelance|web-entwickler", message.content, re.IGNORECASE))
 
-    language_emojis = set(re.findall("\U0001F40D|\U0001F578|\U0001F980|\U0001F439|\U0001F409", message.content))
-    # https://unicode.org/emoji/charts/full-emoji-list.html
-
-    # Convert emojis to names
-    for emoji in language_emojis:
-        { 
-            "\U0001F40D": lambda: languages.add("python"),
-            "\U0001F578": lambda: languages.add("javascript"),
-            "\U0001F980": lambda: languages.add("rust"),
-            "\U0001F439": lambda: languages.add("go"),
-            "\U0001F409": lambda: languages.add("c++")
-        }[emoji]()
 
     if languages:
         server = bot.get_guild(SERVER_ID)
