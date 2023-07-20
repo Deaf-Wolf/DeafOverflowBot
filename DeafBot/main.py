@@ -22,12 +22,12 @@ async def dm_about_roles(member):
         
             Welche Sprache benutzt du?:
                     
-            * Python (🐍)
-            * JavaScript (🕸️)
+            * Python ()
+            * JavaScript ()
             * Java
-            * Rust (🦀)
+            * Rust ()
             * C# ()
-            * C++ (🐉)
+            * C++ ()
             
             Was pass zu dir?:
             * azubi
@@ -35,9 +35,9 @@ async def dm_about_roles(member):
             * freelance
             * web-entwickler
                     
-            Reply to this message with one or more of the language names above so I can assign you the right roles on our server.
+            Antworte auf diese Nachricht mit deine gewünschte Rolle.
 
-            Reply with the name or emoji of a language you're currently using and want to stop and I'll remove that role for you.
+            Antworte mit die Rolle die du Löschen willst.
             """
     )
 
@@ -78,13 +78,13 @@ async def assign_roles(message):
             await message.channel.send("Error assigning/removing roles.")
         else:
             if roles_to_add:
-                    await message.channel.send(f"You've been assigned the following role{'s' if len(roles_to_add) > 1 else ''} on {server.name}: { ', '.join([role.name for role in roles_to_add]) }")
+                    await message.channel.send(f"Du bekommst die folgende Rolle {'s' if len(roles_to_add) > 1 else ''} auf {server.name}: { ', '.join([role.name for role in roles_to_add]) }")
                     
             if roles_to_remove:
-                await message.channel.send(f"You've lost the following role{'s' if len(roles_to_remove) > 1 else ''} on {server.name}: { ', '.join([role.name for role in roles_to_remove]) }")
+                await message.channel.send(f"Du hast die folgende Rolle verloren{'s' if len(roles_to_remove) > 1 else ''} auf {server.name}: { ', '.join([role.name for role in roles_to_remove]) }")
 
     else:
-        await message.channel.send("No supported languages were found in your message.")
+        await message.channel.send("Für deine Sprache gibst noch keine Rollen, schreib eine DM an dem ADMIN.")
 
 
 @bot.event
