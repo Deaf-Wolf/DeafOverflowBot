@@ -20,6 +20,11 @@ class MyClient(discord.Client):
             command = message.content[1:]  # Entfernt das '!'
             if command == 'hallo':
                 await message.channel.send('Hallo!')
+
+            elif command == 'roles':
+                roles = ', \n'.join([role.name for role in message.guild.roles])
+                await message.channel.send(f"Dieser server hat die Rollen:\n{roles}")
+
             elif command == 'help':
                 help_message = """
                 **Liste aller Befehle:**
@@ -37,6 +42,3 @@ intents.message_content = True
 
 client = MyClient(intents=intents)
 client.run(TOKEN)
-
-
-# test commit
