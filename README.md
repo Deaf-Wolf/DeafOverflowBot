@@ -1,19 +1,19 @@
 # DeafOverflowBot
 
 ## Installing
-## Make sure you have these programs installed:
+ Make sure you have these programs installed:
 
   - Python 3.8 or newer
   - Python 3 PIP
   - virtualenv (pip install virtualenv)
   - git
 
-#Note
+# Note
 virtualenv
 "A virtual environment is a Python environment such that the Python interpreter, libraries and scripts installed into it are isolated from those installed in other virtual environments, and (by default) any libraries installed in a “system” Python, i.e., one which is installed as part of your operating system"
 
 
-#Setup
+# Setup
 $ python3 -m venv venv_DeafOverflowBot
 $ cd venv_DeafOverflowBot
 $ git clone <this repository>
