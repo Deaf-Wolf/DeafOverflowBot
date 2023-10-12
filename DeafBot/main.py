@@ -11,18 +11,18 @@ class MyClient(discord.Client):
         print(f'Logged on as {self.user}!')
 
     async def on_message(self, message):
-        # Ignoriere Nachrichten vom Bot selbst
+        # Ignores messages from bot 
         if message.author == self.user:
             return
 
-        # Prüfe, ob die Nachricht mit '!' beginnt
+        # checks if messages contains '!'
         if message.content.startswith('!'):
             command = message.content[1:]  # Entfernt das '!'
             if command == 'hallo':
                 await message.channel.send('Hallo!')
 
         
-        # Wenn du möchtest, kannst du auch einfach alle Nachrichten anzeigen
+        # prints every messages in console 
         else:
             print(f'Message from {message.author}: {message.content}')
 
