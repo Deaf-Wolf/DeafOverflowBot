@@ -20,26 +20,51 @@ class MyClient(discord.Client):
 
         # checks if messages contains '!'
         if message.content.startswith('!'):
-            command = message.content[1:]  # Entfernt das '!'
+            command = message.content[1:]  # Removes the '!'
             if command == 'hallo':
                 await message.channel.send('Hallo!')
 
             elif command == 'roles':
-                roles = ', \n'.join([role.name for role in message.guild.roles])
+                #List all roles of the server
+                roles = ', \n'.join([role.name for role in message.guild.roles if role.name != "@everyone" and role.name != "DeafBot"])
                 await message.channel.send(f"Dieser server hat die Rollen:\n{roles}")
 
-                #Erstellen Sie Schaltflächen für jede Rolle
+                #Creates a button for each role
                 view = View()
-                for role in message.guild.roles:
-                    if role.name != "@everyone":
-                        view.add_item(Button(label=role.name, custom_id=str(role.id)))
-                await message.channel.send("Klicken Sie auf eine Schaltfläche, um eine Rolle hinzuzufügen.", view=view)
+                server_roles = [role for role in message.guild.roles if role.name != "@everyone" and role.name != "DeafBot"]
+                #Checks if Server has Roles
+                if not server_roles:
+                    await message.channel.send(f"Keine Rollen zum Hinzufügen!")
+                else:
+                    for role in server_roles:
+                        view.add_item(Button(label=role.name, custom_id=f"add_{role.id}"))
+                    await message.channel.send("Klicken Sie auf eine Schaltfläche, um eine Rolle hinzuzufügen.", view=view)
+
+            elif command == 'removeRoles':
+                #List roles of the user
+                roles = ', \n'.join([role.name for role in message.author.roles if role.name != "@everyone" and role.name != "DeafBot"])
+                await message.channel.send(f"{message.author.name} hat die Rollen:\n{roles}")
+
+                #Creates a button for each role
+                view = View()
+                user_roles = [role for role in message.author.roles if role.name != "@everyone" and role.name != "DeafBot"]
+
+                #Checks if user has a role or not
+                if not user_roles:
+                    await message.channel.send(f"{message.author.name} hat keine Rollen HHAHAHAHA")
+                else:
+                    for role in user_roles:
+                        view.add_item(Button(label=f"Entferne {role.name}", custom_id=f"remove_{role.id}"))
+                    await message.channel.send("Klicken Sie auf eine Schaltfläche, um eine Rolle zu entfernen.", view=view)
+
+
 
             elif command == 'help':
                 help_message = """
                 **Liste aller Befehle:**
                 `!hallo` - Sagt Hallo!
                 `!roles` - Zeigt alle Rollen an und hügt dir Rollen hinzu :D
+                `!removeRoles` - Entfernt deine Rollen
                 `!help` - Zeigt diese Hilfe an.
                 """
                 await message.channel.send(help_message)
@@ -51,11 +76,23 @@ class MyClient(discord.Client):
 
     async def on_interaction(self, interaction):
         if interaction.type == discord.InteractionType.component:
-            if 'custom_id' in interaction.data and interaction.data['custom_id'].isnumeric():
-                role_id = int(interaction.data['custom_id'])
-                role = discord.utils.get(interaction.guild.roles, id=role_id)
-                await interaction.user.add_roles(role)
-                await interaction.response.send_message(f"Rolle {role.name} hinzugefügt!", ephemeral=True)
+            if 'custom_id' in interaction.data:
+                custom_id = interaction.data['custom_id']
+                
+                # !roles
+                if custom_id.startswith('add_'):
+                    role_id = int(custom_id[4:])
+                    role = discord.utils.get(interaction.guild.roles, id=role_id)
+                    await interaction.user.add_roles(role)
+                    await interaction.response.send_message(f"Rolle {role.name} hinzugefügt!", ephemeral=True)
+                
+                # !removeRoles
+                elif custom_id.startswith('remove_'):
+                    role_id = int(custom_id[7:])
+                    role = discord.utils.get(interaction.guild.roles, id=role_id)
+                    await interaction.user.remove_roles(role)
+                    await interaction.response.send_message(f"Rolle {role.name} entfernt!", ephemeral=True)
+                                                        
 
 intents = discord.Intents.default()
 intents.messages = True
