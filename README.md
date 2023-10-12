@@ -1,7 +1,7 @@
 # DeafOverflowBot
 
-##Installing
-#Make sure you have these programs installed:
+## Installing
+# Make sure you have these programs installed:
 
   - Python 3.8 or newer
   - Python 3 PIP
