@@ -1,15 +1,23 @@
 # DeafOverflowBot
 
-## Project Description
-DeafOverflowBot is a [describe what the bot does].
+##Installing
+#Make sure you have these programs installed:
 
-It's designed to [describe the purpose].
+  - Python 3.8 or newer
+  - Python 3 PIP
+  - virtualenv (pip install virtualenv)
+  - git
+
+#Note
+virtualenv
+"A virtual environment is a Python environment such that the Python interpreter, libraries and scripts installed into it are isolated from those installed in other virtual environments, and (by default) any libraries installed in a “system” Python, i.e., one which is installed as part of your operating system"
 
 
-## Usage
-Here's how to use the project:
-- Example 1
-- Example 2
+#Setup
+$ python3 -m venv venv_DeafOverflowBot
+$ cd venv_DeafOverflowBot
+$ git clone <this repository>
+$ pip install -r requirements.txt
 
 
 ## License
