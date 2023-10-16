@@ -1,6 +1,7 @@
 # main.py
 import discord
 import os
+import requests #allows usage of API
 from dotenv import load_dotenv
 from discord.ext import commands
 from discord.ui import Button, View
@@ -13,6 +14,20 @@ DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
 WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
 #TestServer Id´s bellow
+
+# Gets the Picture of NASA A Picture Of the Day
+def get_apod():
+    api_key = os.getenv('NASA_API_KEY')
+    url = f"https://api.nasa.gov/planetary/apod?api_key={api_key}"
+    response = requests.get(url)
+    
+    # Check if request was successfull 
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        print("Error when Get APOD Picture.")
+        return None
 
 
 class MyClient(discord.Client):
@@ -83,13 +98,25 @@ class MyClient(discord.Client):
             elif command == 'help':
                 help_message = """
                 **Liste aller Befehle:**
+                `!help` - Zeigt diese Hilfe an.
                 `!hallo` - Sagt Hallo!
                 `!roles` - Zeigt alle Rollen an und hügt dir Rollen hinzu :D
                 `!removeRoles` - Entfernt deine Rollen
-                `!help` - Zeigt diese Hilfe an.
+                `!apod` - Zeigt NASA Bild des Tages an <3
                 """
                 await message.channel.send(help_message)
-        
+
+            #Respons with Nasa APOD Pic of the Day
+            elif command == 'apod':
+                apod_data = get_apod()
+                if apod_data:
+                    title = apod_data['title']
+                    explanation = apod_data['explanation']
+                    url = apod_data['url']
+                    
+                    # Returns Message to Channel 
+                    await message.channel.send(f"**{title}**\n{explanation}\n{url}")
+
         # prints every messages in console 
         else:
             print(f'Message from {message.author}: {message.content}')
