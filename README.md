@@ -82,5 +82,11 @@ Leaving virtual enviroment
 $ deactivate
 
 
+## Usage
+Here's how to use the project:
+- !help
+Bot will send a message with available commands.
+
+
 ## License
 This project is licensed under the [Mit]([link](https://opensource.org/license/mit/)https://opensource.org/license/mit/).
