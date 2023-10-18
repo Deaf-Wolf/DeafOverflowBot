@@ -11,7 +11,6 @@ It's designed to entertain users.
 
   - Python 3.8 or newer
   - Python 3 PIP
-  - virtualenv (pip install virtualenv)
   - git
 
 # Note
