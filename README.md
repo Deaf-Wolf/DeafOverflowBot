@@ -88,5 +88,10 @@ Here's how to use the project:
 Bot will send a message with available commands.
 
 
+## Documentation
+discord.py
+https://discordpy.readthedocs.io/en/latest/
+
+
 ## License
 This project is licensed under the [Mit]([link](https://opensource.org/license/mit/)https://opensource.org/license/mit/).
