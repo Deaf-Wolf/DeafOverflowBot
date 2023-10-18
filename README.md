@@ -1,5 +1,11 @@
 # DeafOverflowBot
 
+## Project Description
+DeafOverflowBot is a Discord Bot.
+
+It's designed to entertain users.
+
+
 ## Installing
  Make sure you have these programs installed:
 
