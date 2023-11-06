@@ -11,8 +11,8 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
 #Deafoverflow Id´s
-BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
-WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
+BOT_CHANNEL = os.getenv('BOT_CHANNEL_ID')
+WELCOME_CHANNEL = os.getenv('WELCOME_CHANNEL')
 #TestServer Id´s bellow
 
 # Gets the Picture of NASA A Picture Of the Day
