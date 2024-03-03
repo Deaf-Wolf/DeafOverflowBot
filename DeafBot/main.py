@@ -22,7 +22,6 @@ WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
 #Features key´s
 NASA_API_KEY = str(os.getenv('NASA_API_KEY'))
 
-#TestServer Id´s bellow
 
 
 #Loads and Reads .json file
