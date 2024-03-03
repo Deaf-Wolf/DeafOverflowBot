@@ -3,7 +3,7 @@ import discord
 import os
 import requests #allows usage of API
 import json
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 from discord.ext import commands
 from discord.ui import Button, View
 
@@ -17,13 +17,12 @@ dotenv_path = '/home/LarsDev/repository/DeafOverflowBot/DeafBot'
 load_dotenv(dotenv_path)
 
 
-load_dotenv('/home/LarsDev/repository/DeafOverflowBot/DeafBot/.env')
 DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
 print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
 
 #Deafoverflow Id´s
-BOT_CHANNEL = str(os.getenv('BOT_CHANNEL_ID'))
-WELCOME_CHANNEL = str(os.getenv('WELCOME_CHANNEL'))
+BOT_CHANNEL = float(os.getenv('BOT_CHANNEL_ID'))
+WELCOME_CHANNEL = float(os.getenv('WELCOME_CHANNEL'))
 # Print values after loading from environment variables
 print(f'BOT_CHANNEL_ID: {os.getenv("BOT_CHANNEL_ID")}')
 print(f'WELCOME_CHANNEL: {os.getenv("WELCOME_CHANNEL")}')
