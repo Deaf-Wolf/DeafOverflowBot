@@ -13,7 +13,7 @@ from features.role_handler import RoleCommandHandler
 
 
 # Specify the directory containing the .env file
-dotenv_path = '/home/LarsDev/repository/DeafOverflowBot/DeafBot'
+dotenv_path = '/home/LarsDev/repository/DeafOverflowBot/DeafBot/.env'
 load_dotenv(dotenv_path)
 
 
@@ -21,8 +21,8 @@ DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
 print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
 
 #Deafoverflow Id´s
-BOT_CHANNEL = float(os.getenv('BOT_CHANNEL_ID'))
-WELCOME_CHANNEL = float(os.getenv('WELCOME_CHANNEL'))
+BOT_CHANNEL = number(os.getenv('BOT_CHANNEL_ID'))
+WELCOME_CHANNEL = number(os.getenv('WELCOME_CHANNEL'))
 # Print values after loading from environment variables
 print(f'BOT_CHANNEL_ID: {os.getenv("BOT_CHANNEL_ID")}')
 print(f'WELCOME_CHANNEL: {os.getenv("WELCOME_CHANNEL")}')
