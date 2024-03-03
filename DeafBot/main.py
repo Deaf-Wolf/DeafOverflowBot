@@ -14,7 +14,7 @@ from features.role_handler import RoleCommandHandler
 
 
 load_dotenv()
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
 
 #Deafoverflow Id´s
 BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
@@ -120,9 +120,11 @@ class MyClient(discord.Client):
 
     #if bot stops running 
     async def close(self):
-            await channel.send("Ich gehe schlafen!")
-            channel = discord.utils.get(self.get_all_channels(), id=BOT_CHANNEL)
-            await super().close()                                    
+        channel = discord.utils.get(self.get_all_channels(), id=BOT_CHANNEL)
+        if channel:
+           await channel.send("Ich gehe schlafen!")
+        await super().close()
+             
 
 intents = discord.Intents.default()
 intents.messages = True
