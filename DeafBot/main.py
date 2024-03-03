@@ -12,25 +12,18 @@ from features.nasa import NASA
 from features.role_handler import RoleCommandHandler
 
 
+# Specify the directory containing the .env file
+dotenv_path = '/home/LarsDev/repository/DeafOverflowBot/DeafBot'
+load_dotenv(dotenv_path)
 
-load_dotenv()
-DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
-
-#Deafoverflow Id´s
-BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
-WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
-#Features key´s
-NASA_API_KEY = str(os.getenv('NASA_API_KEY'))
-
-
+# Now you can access the environment variable
+DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
 
 #Loads and Reads .json file
 def load_json(filename):
     with open(filename, 'r') as file:
         return set(json.load(file))    
-
-
-
 
 
 
