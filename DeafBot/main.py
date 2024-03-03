@@ -20,6 +20,13 @@ load_dotenv(dotenv_path)
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
 
+#Deafoverflow Id´s
+BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
+WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
+#Features key´s
+NASA_API_KEY = str(os.getenv('NASA_API_KEY'))
+
+
 #Loads and Reads .json file
 def load_json(filename):
     with open(filename, 'r') as file:
