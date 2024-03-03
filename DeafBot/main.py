@@ -42,7 +42,7 @@ def load_json(filename):
 class MyClient(discord.Client):
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
-        channel = discord.utils.get(self.get_all_channels(), id=BOT_CHANNEL)
+        channel = discord.utils.get(self.get_all_channels(), id=int(BOT_CHANNEL))
         if channel:
             await channel.send("Ich bin wach!")
 
