@@ -21,7 +21,7 @@ DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
 print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
 
 #Deafoverflow Id´s
-BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
+BOT_CHANNEL = str(os.getenv('BOT_CHANNEL_ID'))
 WELCOME_CHANNEL = str(os.getenv('WELCOME_CHANNEL'))
 # Print values after loading from environment variables
 print(f'BOT_CHANNEL_ID: {os.getenv("BOT_CHANNEL_ID")}')
