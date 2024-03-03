@@ -3,7 +3,7 @@ import discord
 import os
 import requests #allows usage of API
 import json
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from discord.ext import commands
 from discord.ui import Button, View
 
@@ -16,13 +16,19 @@ from features.role_handler import RoleCommandHandler
 dotenv_path = '/home/LarsDev/repository/DeafOverflowBot/DeafBot'
 load_dotenv(dotenv_path)
 
-# Now you can access the environment variable
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+
+load_dotenv('/home/LarsDev/repository/DeafOverflowBot/DeafBot/.env')
+DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
 print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
 
 #Deafoverflow Id´s
-BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
-WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
+BOT_CHANNEL = str(os.getenv('BOT_CHANNEL_ID'))
+WELCOME_CHANNEL = str(os.getenv('WELCOME_CHANNEL'))
+# Print values after loading from environment variables
+print(f'BOT_CHANNEL_ID: {os.getenv("BOT_CHANNEL_ID")}')
+print(f'WELCOME_CHANNEL: {os.getenv("WELCOME_CHANNEL")}')
+
+
 #Features key´s
 NASA_API_KEY = str(os.getenv('NASA_API_KEY'))
 
