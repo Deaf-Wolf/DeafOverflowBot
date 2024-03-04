@@ -10,18 +10,26 @@ from discord.ui import Button, View
 #Import features
 from features.nasa import NASA
 from features.role_handler import RoleCommandHandler
+from features.jokes import Jokes
+
+# Specify the directory containing the .env file
+dotenv_path = '/home/LarsDev/repository/DeafOverflowBot/DeafBot/.env'
+load_dotenv(dotenv_path)
 
 
-
-load_dotenv()
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
+print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
 
 #Deafoverflow Id´s
-BOT_CHANNEL = int(os.getenv('BOT_CHANNEL_ID'))
-WELCOME_CHANNEL = int(os.getenv('WELCOME_CHANNEL'))
+BOT_CHANNEL = str(os.getenv('BOT_CHANNEL_ID'))
+WELCOME_CHANNEL = str(os.getenv('WELCOME_CHANNEL'))
+# Print values after loading from environment variables
+print(f'BOT_CHANNEL_ID: {os.getenv("BOT_CHANNEL_ID")}')
+print(f'WELCOME_CHANNEL: {os.getenv("WELCOME_CHANNEL")}')
+
+
 #Features key´s
 NASA_API_KEY = str(os.getenv('NASA_API_KEY'))
-
 
 
 #Loads and Reads .json file
@@ -31,13 +39,10 @@ def load_json(filename):
 
 
 
-
-
-
 class MyClient(discord.Client):
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
-        channel = discord.utils.get(self.get_all_channels(), id=BOT_CHANNEL)
+        channel = discord.utils.get(self.get_all_channels(), id=int(BOT_CHANNEL))
         if channel:
             await channel.send("Ich bin wach!")
 
@@ -75,6 +80,7 @@ class MyClient(discord.Client):
                 `!roles` - Zeigt alle Rollen an und hügt dir Rollen hinzu :D
                 `!removeRoles` - Entfernt deine Rollen
                 `!apod` - Zeigt NASA Bild des Tages an <3
+                `!joke` - Outputs a Joke
                 """
                 await message.channel.send(help_message)
 
@@ -90,8 +96,9 @@ class MyClient(discord.Client):
             elif command == 'apod':
                 ## await NASA.get_apod(message , NASA_API_KEY)
                 await message.channel.send("Sorry, APOD is Locked.")
-               
-      
+            elif command == 'joke':
+                ## Output Joke
+                await Jokes.get_joke(message)
         # prints every messages in console 
         else:
             print(f'Message from {message.author}: {message.content}')
@@ -120,9 +127,11 @@ class MyClient(discord.Client):
 
     #if bot stops running 
     async def close(self):
-            await channel.send("Ich gehe schlafen!")
-            channel = discord.utils.get(self.get_all_channels(), id=BOT_CHANNEL)
-            await super().close()                                    
+        channel = discord.utils.get(self.get_all_channels(), id=BOT_CHANNEL)
+        if channel:
+           await channel.send("Ich gehe schlafen!")
+        await super().close()
+             
 
 intents = discord.Intents.default()
 intents.messages = True
