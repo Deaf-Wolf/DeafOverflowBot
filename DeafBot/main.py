@@ -10,7 +10,7 @@ from discord.ui import Button, View
 #Import features
 from features.nasa import NASA
 from features.role_handler import RoleCommandHandler
-
+from features.jokes import Jokes
 
 # Specify the directory containing the .env file
 dotenv_path = '/home/LarsDev/repository/DeafOverflowBot/DeafBot/.env'
@@ -80,6 +80,7 @@ class MyClient(discord.Client):
                 `!roles` - Zeigt alle Rollen an und hügt dir Rollen hinzu :D
                 `!removeRoles` - Entfernt deine Rollen
                 `!apod` - Zeigt NASA Bild des Tages an <3
+                `!joke` - Outputs a Joke
                 """
                 await message.channel.send(help_message)
 
@@ -95,8 +96,9 @@ class MyClient(discord.Client):
             elif command == 'apod':
                 ## await NASA.get_apod(message , NASA_API_KEY)
                 await message.channel.send("Sorry, APOD is Locked.")
-               
-      
+            elif command == 'joke':
+                ## Output Joke
+                await Jokes.get_joke(message)
         # prints every messages in console 
         else:
             print(f'Message from {message.author}: {message.content}')
