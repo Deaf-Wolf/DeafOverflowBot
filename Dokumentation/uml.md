@@ -1,4 +1,4 @@
-```mermaid.js
+```mermaid
 graph LR
   subgraph Discord Bot [MyClient]
     MyClient --> on_ready
