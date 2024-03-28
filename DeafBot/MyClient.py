@@ -29,9 +29,6 @@ class MyClient(discord.Client):
         if channel:
             # await channel.send("Ich bin wach!")
             logging.info("Ich bin wach!")
-
-            #load copyright filter list
-            allowed_licenses = load_json('allowed_licenses.json')
         else:
             print(f"Kanal mit ID {self.BOT_CHANNEL} nicht gefunden!")
 

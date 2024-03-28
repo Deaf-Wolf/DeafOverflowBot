@@ -3,8 +3,6 @@ import os
 import logging
 from config.logConfig import logging_config
 from dotenv import load_dotenv
-from discord.ext import commands
-from discord.ui import Button, View
 from MyClient import MyClient
 
 class Main:
@@ -16,9 +14,9 @@ class Main:
         logging.basicConfig(**logging_config)
 
         # Get DISCORD_TOKEN securely from environment variable
-        self.DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+        self.DISCORD_TOKEN = os.getenv('DISCORD_TOKEN') #Replace Token directly on pi (Pi has no env)
         if not self.DISCORD_TOKEN:
-            raise ValueError("[main]DISCORD_TOKEN not found in .env file!")
+            raise ValueError("[main] DISCORD_TOKEN not found in .env file!")
 
         intents = discord.Intents.default()
         intents.messages = True

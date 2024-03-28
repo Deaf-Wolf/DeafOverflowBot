@@ -41,3 +41,15 @@ Time: 2024-03-28 18:27:24,282
 - Name: root 
 - Level: ERROR 
 - Message: Error running the bot: Improper token has been passed.
+Time: 2024-03-28 18:31:58,971 
+- Name: discord.client 
+- Level: WARNING 
+- Message: PyNaCl is not installed, voice will NOT be supported
+Time: 2024-03-28 18:31:58,972 
+- Name: discord.client 
+- Level: INFO 
+- Message: logging in using static token
+Time: 2024-03-28 18:31:59,191 
+- Name: root 
+- Level: ERROR 
+- Message: Error running the bot: Improper token has been passed.
