@@ -1,15 +1,12 @@
 # main.py
 import discord
 import os
-import requests #allows usage of API
-import json
 import logging
 from dotenv import load_dotenv
 from discord.ext import commands
 from discord.ui import Button, View
 from MyClient import MyClient
-#Import plugins
-from plugins.role_handler import RoleCommandHandler
+
 
 class Main:
     # Setting up Logging 

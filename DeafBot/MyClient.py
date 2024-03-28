@@ -1,12 +1,13 @@
 import discord
 import os
 from dotenv import load_dotenv
-from plugins.nasa import NASA
-from plugins.jokes import Jokes
+from features.nasa import NASA
+from features.jokes import Jokes
+from features.role_handler import RoleCommandHandler
 
 class MyClient(discord.Client):
     # Specify the directory containing the env file
-    dotenv_path = 'env'
+    dotenv_path = 'DeafBot/.env'
     load_dotenv(dotenv_path)
     
     #plugins key´s
@@ -16,7 +17,7 @@ class MyClient(discord.Client):
     BOT_CHANNEL = str(os.getenv('BOT_CHANNEL_ID'))
     WELCOME_CHANNEL = str(os.getenv('WELCOME_CHANNEL'))
     # Print values after loading from environment variables
-    print(f'BOT_CHANNEL_ID: {os.getenv("BOT_CHANNEL_ID")}')
+    print(f'BOT_CHANNEL: {os.getenv("BOT_CHANNEL")}')
     print(f'WELCOME_CHANNEL: {os.getenv("WELCOME_CHANNEL")}')
 
     async def on_ready(self):
