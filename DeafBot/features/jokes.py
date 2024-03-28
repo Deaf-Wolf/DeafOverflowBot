@@ -15,4 +15,3 @@ class Jokes:
 
         else:
             await message.channel.send("Sorry, Joke request failed.")
-

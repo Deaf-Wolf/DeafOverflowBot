@@ -1,7 +1,11 @@
 import requests
 
 class NASA:
-
+    #Loads and Reads .json file
+    def load_json(filename):
+        with open(filename, 'r') as file:
+            return set(json.load(file))    
+    
     # Gets the Picture of NASA A Picture Of the Day
     @staticmethod
     async def get_apod(message, api_key):
@@ -23,5 +27,3 @@ class NASA:
 
         else:
             await message.channel.send("Sorry, APOD request failed.")
-
-
