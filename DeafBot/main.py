@@ -1,28 +1,37 @@
-# main.py
 import discord
 import os
 import logging
+from config.logConfig import logging_config
 from dotenv import load_dotenv
 from discord.ext import commands
 from discord.ui import Button, View
 from MyClient import MyClient
 
-
 class Main:
-    # Setting up Logging 
-    handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-    
-    # Specify the directory containing the env file
-    dotenv_path = 'env'
-    load_dotenv(dotenv_path)
-    
-    DISCORD_TOKEN = str(os.getenv('DISCORD_TOKEN'))
-    print(f'DISCORD_TOKEN: {DISCORD_TOKEN}')
-    
-    intents = discord.Intents.default()
-    intents.messages = True
-    intents.message_content = True
-    
-    client = MyClient(intents=intents)
-    # For debug logging set log_level to logging.DEBUG
-    client.run(DISCORD_TOKEN, log_handler=handler, log_level=logging.INFO)
+
+    def __init__(self):
+        # Load environment variables from .env file (more secure)
+        dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+        load_dotenv(dotenv_path)
+        logging.basicConfig(**logging_config)
+
+        # Get DISCORD_TOKEN securely from environment variable
+        self.DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+        if not self.DISCORD_TOKEN:
+            raise ValueError("[main]DISCORD_TOKEN not found in .env file!")
+
+        intents = discord.Intents.default()
+        intents.messages = True
+        intents.message_content = True
+
+        self.client = MyClient(intents=intents)
+
+        # Error handling for client.run() using try-except block
+        try:
+            self.client.run(self.DISCORD_TOKEN)
+        except discord.DiscordException as e:
+            logging.error(f"Error running the bot: {e}")
+            # Handle the error gracefully (e.g., restart, notify developer)
+
+if __name__ == '__main__':
+    Main()

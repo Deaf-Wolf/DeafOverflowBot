@@ -1,11 +1,14 @@
 import discord
 import os
+import logging
 from dotenv import load_dotenv
 from features.nasa import NASA
 from features.jokes import Jokes
 from features.role_handler import RoleCommandHandler
 
 class MyClient(discord.Client):
+    logger = logging.getLogger(__name__)  # Create a logger for this class
+
     # Specify the directory containing the env file
     dotenv_path = 'DeafBot/.env'
     load_dotenv(dotenv_path)
@@ -21,7 +24,7 @@ class MyClient(discord.Client):
     print(f'WELCOME_CHANNEL: {os.getenv("WELCOME_CHANNEL")}')
 
     async def on_ready(self):
-        print(f'Logged on as {self.user}!')
+        self.logger.info(f'Logged on as {self.user}!')  # Use logger for information
         channel = discord.utils.get(self.get_all_channels(), id=int(self.BOT_CHANNEL))
         if channel:
             # await channel.send("Ich bin wach!")
@@ -81,7 +84,8 @@ class MyClient(discord.Client):
                 await Jokes.get_joke(message)
         # prints every messages in console 
         else:
-            print(f'Message from {message.author}: {message.content}')
+            self.logger.debug(f'Message from {message.author}: {message.content}')  # Use logger for debugging
+
 
     async def on_interaction(self, interaction):
         if interaction.type == discord.InteractionType.component:
@@ -106,6 +110,6 @@ class MyClient(discord.Client):
     async def close(self):
         channel = discord.utils.get(self.get_all_channels(), id=self.BOT_CHANNEL)
         if channel:
-           # await channel.send("Ich gehe schlafen!")
-           await logging.info("Ich gehe schlafen!")
+           await channel.send("Ich gehe schlafen!")
+           self.logger.info("Ich gehe schlafen!")  # Use logger for information
         await super().close()
